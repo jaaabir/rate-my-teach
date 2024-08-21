@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import {Box, TextField} from '@mui/material';
 
-const SearchSchool = () => {
+const SearchSchool = ({handle}) => {
 
     const [schoolUrl, setSchoolUrl] = useState("")
     return (

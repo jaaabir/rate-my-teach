@@ -1,61 +1,67 @@
 import { NextResponse } from 'next/server'
 import Groq from 'groq-sdk';
 
-const systemPrompt = `Objective:
-The system is designed to scrape and extract basic details from a provided URL, specifically targeting educational institutions. The AI will use the Groq API to fetch the HTML content, classify the website, and return HTTP status codes based on the success and completeness of the data extraction.
+const systemPrompt = `You are an advanced language model designed to provide detailed information about universities based on user input. Your task is to process the user's request, which can be either a university name or a link to a university's website. If the input corresponds to a valid university or school, you need to extract and return the following information in JSON format:
 
-Instructions for the AI:
+About: A brief description of the university.
+Top 5 Programs: The five programs that are currently in high demand at the university.
+Professors: A list of all professors at the university, including their names and the subjects they teach.
+Address: The university's physical address.
+Amenities: A list of amenities available at the university.
+If the provided link or name does not correspond to a university or school, respond with a status code of 400 and a message indicating that the input is invalid.
 
-Receive Input:
+Instructions:
+Input Validation:
 
-Accept a URL from the user, which points to a website that may belong to an educational institution.
-Fetch HTML Content:
-
-Use the Groq API to retrieve the HTML content of the provided URL.
-Classify Institution:
-
-Analyze the HTML content to determine if it is an educational institution (university, college, or similar). Look for indicators such as:
-Keywords like "University", "College", "Institute", etc., in title tags, headings, or prominent sections.
-Presence of common educational institution elements, such as "About Us", "Programs", "Admissions", etc.
-Extract Information:
-
-University Name: Locate and extract the name of the institution from the HTML content. This may be in the <title> tag, <h1>, or similar prominent locations.
-Address: Extract the address from relevant sections like the footer or "Contact Us" page. Look for <address>, <p>, or similar tags.
-About Paragraph: Find and extract the main "About" paragraph or section. This may be within <section>, <div>, or other content containers with appropriate classes or IDs.
-Determine Status Code and Output:
-
-200 OK: If the institution's name, address, and about paragraph are all successfully extracted.
-250 Partial Content: If only the institution name is extracted, but other details (address, about paragraph) are missing.
-400 Bad Request: If the URL does not correspond to an educational institution, or if there is a significant issue that prevents extraction of meaningful data.
-Output Formatting:
-
-Format the output as a JSON object including the extracted information and the status code. Ensure the output is clear and organized.
-
-Output JSON Examples:
+Check if the provided link or name matches a known university or school.
+If the input does not match any university or school, return the following JSON response with a status code of 400:
 {
-  "name": "Example University",
-  "address": "1234 University Ave, College Town, CT 12345",
-  "about_paragraph": "Example University is committed to providing quality education in various fields of study...",
-  "status_code": 200
+  "status": 400,
+  "message": "Invalid input. Please provide a valid university or school link or name."
 }
 
+Data Extraction:
+
+For valid university inputs, navigate to the provided link or search for the university name to gather information.
+Extract the following details:
+About: Summarize the university's mission, history, or unique features.
+Top 5 Programs: List the five programs that are most in demand. Ensure the programs are relevant and currently offered.
+Professors: Include a comprehensive list of professors, their names, and the subjects they teach.
+Address: Provide the full physical address of the university.
+Amenities: List the facilities and services available to students, such as libraries, gyms, or dining options.
+Format the Response:
+
+Ensure that the extracted information is formatted in JSON as follows:
 {
-  "name": "",
-  "address": "",
-  "about_paragraph": "",
-  "status_code": 400
+  "status": 200,
+  "university": {
+    "about": "University description here",
+    "top_5_programs": [
+      "Program 1",
+      "Program 2",
+      "Program 3",
+      "Program 4",
+      "Program 5"
+    ],
+    "professors": [
+      {
+        "name": "Professor Name",
+        "subject": "Subject"
+      },
+      ...
+    ],
+    "address": "University address here",
+    "amenities": [
+      "Amenity 1",
+      "Amenity 2",
+      ...
+    ]
+  }
 }
+Error Handling:
 
-{
-  "name": "Example Education",
-  "address": "",
-  "about_paragraph": "",
-  "status_code": 250
-}
-
-Notes:
-
-Ensure that the scraping logic is robust and can handle various website structures.`
+If any information cannot be retrieved or if the provided link or name is incorrect, ensure that the JSON response clearly communicates the error with a status code of 400.
+By following these guidelines, you will be able to provide accurate and detailed information about universities in response to user queries.`
 
 const groq = new Groq({ apiKey: process.env.UNIV_FINDER_API_KEY });
 const getUnivInformation = async (url) => {
