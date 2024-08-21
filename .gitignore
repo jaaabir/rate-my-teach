@@ -35,5 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# excel sheets
-univ_list.xlsx
+# assets
+/assets/*
+
