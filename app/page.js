@@ -2,8 +2,11 @@
 import { Box, Button, Typography, AppBar, Toolbar, Container, Grid } from '@mui/material'
 import {SignedOut } from "@clerk/nextjs"
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LandingPage() {
+
+  const router = useRouter();
 
   const [starEffect, setStarEffect] = useState(false);
 
@@ -14,6 +17,12 @@ export default function LandingPage() {
   const handleMouseLeave = () => {
     setStarEffect(false);
   };
+
+  const handleStartChat = () => {
+    
+    router.push('/chatbot');
+  }
+    
 
   return (
     <Box>
@@ -68,7 +77,7 @@ export default function LandingPage() {
             variant="contained"
             color="primary"
             size="medium"
-            //onClick={handleStartChat}
+            onClick={handleStartChat}
             sx={{
               px: 4,
               py: 1.5,
