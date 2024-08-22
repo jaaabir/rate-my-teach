@@ -18,7 +18,7 @@ export default function Home() {
           {role: 'assistant', content: ''},
         ])
       
-        const response = fetch('/api/chat', {
+        const response = fetch('/api/groq/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
