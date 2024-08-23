@@ -12,32 +12,31 @@ export default function Home() {
         }
       ])
       const [message, setMessage] = useState('')
+
       const sendMessage = async () => {
         
-        // setMessages((messages) => [
-        //   ...messages,
-        //   {role: 'user', content: message},
-        //   {role: 'assistant', content: ''},
-        // ])
+        const userQuery = message
+        setMessage('')
+        setMessages(pastMessages => [
+          ...pastMessages,
+          {role: 'user', parts: [{text: message}]}
+        ])
+
         try {
-          const history = messages.slice(1)
-          console.log('before fetching the api')
-          console.log(history)
-          console.log(message)
+          const history = messages.slice(1, messages.length - 1)
           const response = await fetch('/api/chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ history : history, userQuery: message }),
+            body: JSON.stringify({ history : history, userQuery: userQuery }),
             })
           
-            setMessages((past_messages) => [
-              ...past_messages,
-              {role: 'user', parts: [{text: message}]},
-              {role: 'model', parts: [{text: response.bot_response}]}
-            ])
-            setMessage('')
+          const data = await response.json()
+          setMessages((pastMessages) => [
+            ...pastMessages,
+            {role: 'model', parts: [{text: data.bot_response}]}
+          ])
         } catch (err) {
           console.log(err)
         }
@@ -85,7 +84,7 @@ export default function Home() {
                     borderRadius={16}
                     p={3}
                   >
-                    {message.content}
+                    {message.parts[0].text}
                   </Box>
                 </Box>
               ))}
