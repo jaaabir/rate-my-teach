@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ratemyprofessor-dd601",
+  "private_key_id": "0b365c378d01d9580ad598784c5fec02c61f0c8b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCNFA43pL1LnqVt\nMO05RbtuA70GSmIdyZl50LZmAgvPsEVScumPHJJD0K4jhDgEmRBlOqzR5avlK/xY\n9zxmquZMWeCl4ThDWi1MRpSqTFr/O6ImQbTrhw9/vMW8y8OjD4I9r/NqROwuayAr\nlPCwSN+KOqCRWdIknpkjJRI+AT+wNqC38WRGmEBy7fwcFu77A4yr/I8Sa6cvsyzv\n0xccVuxCXhdffiow11HIH0s13zFcMzKuqO9Ax3WYKGRBeIbC998Nbu7YtZvVh+gI\npE5SPXntQch4KP8SBGEJkI3jYDBwZQXkjG1iFLn09SArMTOLXQ+H3YxORxVk8SxF\nq+QXKSi1AgMBAAECggEAAKozvifWW6RDzYHV1bKnISvmP7vO6q4cPUnisxfXxdsL\nSbfUkoZs1gLj5kb87LkvwxZdz3qtb6LJYtUZ22EO5LJWEecvTuFIXpxgxbyBXsqR\n1vKIhGLXbH3vh3jQsZ2qhjNzNeEyhBQGOmwYSWNDwuNID64ROtOG5mScEaldhkXm\n3gsnhP5xrljUub7nfvJDXtTUUovrPDdmRv/ZttSe54YyONSI9s+vkWD6zx8x5QtP\nI63MRZb+fI26Tm/7XlFGoiO4Nahb00jiNf07pAHumktFeczwYWXBtfWLgJdPyJkY\niOreNH9L4PXnL3ZQrnINwwZOnlEijh73Zd2pRSRFYQKBgQC+mBbb/Br0eBdEyRqg\njXTD5YoVSo6bNRKsbpV6iDxPs5hQhAz/YHxqCWTzQ5gGRUX/mrqzCtyIv3bgDFy9\n41XjEiZLGbbhXEZKiJW7MUg9inFvXafHJI2bm+Q6ZvaZ8INlQtd2aLzUYJJi6hOD\nfGG176RoYzoUQ1OGD+R4idD7lQKBgQC9ffM4BFdy2C5HDewF0sd5lk7KqAMZ0dC/\nIEoNvWnd1sZTw+X5qRO/sAjMTD1Nwds+FheKAriy9KpoCEJVi3DYXLwRjS9I6RvR\n8Q21ETvtoYDokRPwSSn//O5NKB36MCeBDI2HYl1hxwr5tulL5jmlhTq/oLhidJNi\nXustcZMwoQKBgCD80+AJV2T+sBBQulIViaMqRGcA+4OzgOLlVOvbTo0A6Zjt8g31\nVjNIIvfTuClFriLaVfwNIjRs5xdKLHcVNNVTW9tdvQBuZyAZWckHc5hrMMz0qchW\n9Ed9iNfu4Dmunh9VnVM6N4yOlmeWWgBE8+h4bL1Ah1ngeUFX2NRgDhKtAoGAWctl\nhhYImpN22pTuU5Qekq93hvE3BvU2Rlu2u+wWTtmIAgnC4RwOD7gLc0RtiHtkuXce\nkHfZrnPijIndZUw+nUjUljyhO5u7YzEnnbYc/+6Yd5zIJgWFsZjaFBX+nqBTGAQq\nzQz/02XO/aZ/x0fB6X3I6SXwOjej3+m66D350gECgYAmDE/2Nbczz+ADF1fJ1op0\n0ypNE93w+S1GyD/k1hnHNcVm8LfPi7NZi1QQGssnHPOt1yA/k0IsF8c1u8XwnCfx\nrt2ZLZylfb2GLlOHUm74rcRxTdG4cwupBENt8rP4BvPYOTlUkielSGxfz1RShKgk\n9We6OcxwHXmEc04/A7sKCQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "rate-my-prof@ratemyprofessor-dd601.iam.gserviceaccount.com",
+  "client_id": "108254978059146721390",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rate-my-prof%40ratemyprofessor-dd601.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

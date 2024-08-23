@@ -20,7 +20,7 @@ export default function LandingPage() {
 
   const handleStartChat = () => {
     
-    router.push('/chatbot');
+    router.push('/ranking');
   }
     
 
