@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Typography, AppBar, Toolbar, Container, Grid } from '@mui/material'
+import { Box, Button, Typography, AppBar, Toolbar, Container, Grid, useMediaQuery, useTheme } from '@mui/material'
 import {SignedOut } from "@clerk/nextjs"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -8,17 +8,15 @@ export default function LandingPage() {
 
   const router = useRouter();
 
-  const [starEffect, setStarEffect] = useState(false);
-
-  const handleMouseEnter = () => {
-    setStarEffect(true);
-  };
-
-  const handleMouseLeave = () => {
-    setStarEffect(false);
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleStartChat = () => {
+    
+    router.push('/chatbot');
+  }
+
+  const handleUniversityRanking = () => {
     
     router.push('/ranking');
   }
@@ -67,12 +65,13 @@ export default function LandingPage() {
             width: '100vw',
           }}
         >
-          <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'white' }}>
+          <Typography variant={isMobile ? "h3" : "h2"} component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'white' }}>
           Streamline Your University Search
           </Typography>
-          <Typography variant="h5" component="h2" gutterBottom sx={{ color: 'white' }}>
+          <Typography variant={isMobile ? "h6" : "h5"} component="h2" gutterBottom sx={{ color: 'white' }}>
           U-Rankly - The Trusted University Ranking Platform
           </Typography>
+          <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'center', mt: 4 }}></Box>
           <Button
             variant="contained"
             color="primary"
@@ -82,7 +81,8 @@ export default function LandingPage() {
               px: 4,
               py: 1.5,
               fontSize: '1rem',
-              mt: 2,
+              mb: isMobile ? 2 : 0,
+              mr: isMobile ? 0 : 2, 
               borderRadius: 7,
               position: 'relative',
           overflow: 'hidden',
@@ -95,13 +95,37 @@ export default function LandingPage() {
             height: '100%',
             background: 'radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)',
             zIndex: 1,
-            animation: starEffect ? 'starEffect 1s ease-out forwards' : 'none',
           },
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
           >
             Start Chatting
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            size="medium"
+            onClick={handleUniversityRanking}
+            sx={{
+              px: 4,
+              py: 1.5,
+              fontSize: '1rem',
+              mt: 1,
+              borderRadius: 7,
+              position: 'relative',
+          overflow: 'hidden',
+          '&:before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)',
+            zIndex: 1,
+          },
+        }}
+          >
+            University Rankings
           </Button>
         </Box>
       </Box>
@@ -116,7 +140,7 @@ export default function LandingPage() {
         <Container>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Typography variant="body1">© 2023 U-Rankly. All rights reserved.</Typography>
+              <Typography variant="body1" align="center">© 2023 U-Rankly. All rights reserved.</Typography>
             </Grid>
           </Grid>
         </Container>

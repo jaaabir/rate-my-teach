@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy, limit, startAfter, startAt } from 'firebase/firestore';
 import { db } from '../firebase'; // Adjust the import path based on your project structure
-import { Container, TextField, Card, CardContent, Typography, Grid, MenuItem, Select, FormControl, InputLabel, Box, Button, AppBar, Toolbar, Pagination, CircularProgress } from '@mui/material';
+import { Container, TextField, Card, CardContent, Typography, Grid, MenuItem, Select, FormControl, InputLabel, Box, Button, AppBar, Toolbar, Pagination, CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 
 
 const UniversitiesPage = () => {
@@ -14,6 +14,8 @@ const UniversitiesPage = () => {
   const [filteredUniversities, setFilteredUniversities] = useState([]);
   const [sortCriterion, setSortCriterion] = useState('rank'); // Default sorting criterion
   const [sortOrder, setSortOrder] = useState('desc'); // Default sorting order: descending
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10); // Number of items per page
@@ -116,7 +118,11 @@ const UniversitiesPage = () => {
   const totalPages = Math.ceil(totalUniversities / itemsPerPage);
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'White' }}>
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column',
+      backgroundColor: 'white', // Replace with your image path
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',}}>
       <AppBar position="fixed" sx={{ backgroundColor: '#003366', width: '100%' }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -129,6 +135,7 @@ const UniversitiesPage = () => {
         <Typography variant="h3" gutterBottom align="center">
           University Rankings
         </Typography>
+        
         <Grid container spacing={4}>
           {/* Left Column: Filters and Sorting */}
           <Grid item xs={12} md={4}>
@@ -175,7 +182,28 @@ const UniversitiesPage = () => {
                   <MenuItem value="desc">Descending</MenuItem>
                 </Select>
               </FormControl>
-              <Button variant="contained" fullWidth onClick={() => filterAndSortUniversities(universities)}>
+              <Button variant="contained"
+               color="primary"
+               size="medium"fullWidth onClick={() => filterAndSortUniversities(universities)} sx={{
+                px: 4,
+                py: 1.5,
+                fontSize: '1rem',
+                mb: isMobile ? 2 : 0,
+                mr: isMobile ? 0 : 2, 
+                borderRadius: 7,
+                position: 'relative',
+            overflow: 'hidden',
+            '&:before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: 'radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)',
+              zIndex: 1,
+            },
+          }}>
                 Apply Filters
               </Button>
             </Box>
@@ -184,28 +212,25 @@ const UniversitiesPage = () => {
           {/* Right Column: University Grid */}
           <Grid item xs={12} md={8}>
             <Grid container spacing={3}>
-              {filteredUniversities.map((uni, index) => (
-               
-                <Grid item xs={12} sm={6} key={index}>
-                  <Card variant="outlined">
-                    <CardContent>
-                      <Typography variant="h6" component="div">
-                        {uni['Institution Name']}
-                      </Typography>
-                      <Typography color="text.secondary">
-                        <strong>Rank:</strong> {uni.Rank}
-                      </Typography>
-                      <Typography color="text.secondary">
-                        <strong>Location:</strong> {uni.Location}
-                      </Typography>
-                      <Typography color="text.secondary">
-                        <strong>Overall Score:</strong> {uni.Overall}
-                      </Typography>
-
-                      
-                    </CardContent>
-                  </Card>
-                </Grid>
+            {filteredUniversities.map((uni, index) => (
+           <Grid item xs={12} sm={6} key={index}>
+          <Card variant="outlined" sx={{ backgroundColor: '#003366', color: 'white' }}>
+          <CardContent>
+          <Typography variant="h6" component="div" sx={{ color: 'white' }}>
+          {uni['Institution Name']}
+          </Typography>
+          <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+          <strong>Rank:</strong> {uni.Rank}
+          </Typography>
+          <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+          <strong>Location:</strong> {uni.Location}
+          </Typography>
+          <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+          <strong>Overall Score:</strong> {uni.Overall}
+           </Typography>
+          </CardContent>
+         </Card>
+         </Grid>
               ))}
             </Grid>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
@@ -219,6 +244,22 @@ const UniversitiesPage = () => {
           </Grid>
         </Grid>
       </Container>
+      <Box
+        sx={{
+          backgroundColor: '#003366',
+          color: 'white',
+          py: 4,
+          mt: 0,
+        }}
+      >
+        <Container>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="body1">© 2023 U-Rankly. All rights reserved.</Typography>
+            </Grid>
+          </Grid>
+        </Container>
+    </Box>
     </Box>
   );
 };
